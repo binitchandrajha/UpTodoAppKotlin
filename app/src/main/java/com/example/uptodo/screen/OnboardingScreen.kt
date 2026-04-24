@@ -74,6 +74,7 @@ val descriptions = listOf(
 @Composable
 fun OnboardingScreen(onFinish : () -> Unit){
     val pagerState = rememberPagerState(pageCount = { 3 })
+    val scope = rememberCoroutineScope()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF121212),
@@ -139,11 +140,17 @@ fun OnboardingScreen(onFinish : () -> Unit){
                 verticalAlignment = Alignment.CenterVertically
 
             ) {
-                TextButton(onClick = {}) {
+                TextButton(onClick = {
+                    scope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                    }
+                }) {
                     Text(text = "BACK", color = Color.White.copy(alpha = 0.44f))
                 }
                 Button(
-                    onClick = {},
+                    onClick = {
+                        scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF8875FF)
                     ),
