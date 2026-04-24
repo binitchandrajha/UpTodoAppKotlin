@@ -75,6 +75,7 @@ val descriptions = listOf(
 fun OnboardingScreen(onFinish : () -> Unit){
     val pagerState = rememberPagerState(pageCount = { 3 })
     val scope = rememberCoroutineScope()
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFF121212),
@@ -156,7 +157,7 @@ fun OnboardingScreen(onFinish : () -> Unit){
                     ),
                     shape = RoundedCornerShape(4.dp)
                 ) {
-                    Text(text = "Next")
+                    Text(text = if (pagerState.pageCount == pagerState.currentPage + 1) "Get Started" else "NEXT", color = Color.White)
                 }
             }
         }
