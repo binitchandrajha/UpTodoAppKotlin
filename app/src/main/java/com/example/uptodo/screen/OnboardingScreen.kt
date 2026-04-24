@@ -1,6 +1,10 @@
 package com.example.uptodo.screen
 
+import androidx.annotation.DrawableRes
+import kotlinx.coroutines.launch
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,12 +19,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextButton
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -31,6 +38,8 @@ import com.example.uptodo.R
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 
 val titles = listOf(
     "Manage your tasks",
@@ -63,85 +72,84 @@ val descriptions = listOf(
 )
 
 @Composable
-fun OnboardingScreen(onFinish: () -> Unit) {
+fun OnboardingScreen(onFinish : () -> Unit){
     val pagerState = rememberPagerState(pageCount = { 3 })
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        containerColor = Color(0xFF121212)
+        containerColor = Color(0xFF121212),
     ) { innerPadding ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
+            modifier = Modifier.systemBarsPadding(),
         ) {
-            // 1. SKIP Button
             TextButton(
                 onClick = {},
-                modifier = Modifier.padding(16.dp)
             ) {
-                Text(
-                    text = "SKIP",
-                    color = Color.White.copy(alpha = 0.6f)
-                )
+                Text(text = "Skip", color = Color.White.copy(alpha = 0.44f))
             }
 
-            // 2. Middle Section (Pager)
-            HorizontalPager(
-                state = pagerState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .weight(1f)
-            ) { pageIndex ->
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
+            Spacer(modifier = Modifier.size(2.dp))
+
+            HorizontalPager(state = pagerState, modifier = Modifier.weight(1f), verticalAlignment = Alignment.Top) { page ->
+                Column(horizontalAlignment = Alignment.CenterHorizontally){
                     Image(
-                        painter = painterResource(id = pages[pageIndex].image),
+                        painter = painterResource(id = pages[page].image),
                         contentDescription = null,
-                        modifier = Modifier
-                            .size(280.dp)
-                            .padding(top = 2.dp),
-                        contentScale = ContentScale.Fit
+                        modifier = Modifier.size(280.dp),
+                        contentScale = ContentScale.Fit,
                     )
 
-                    /* Paging Indicator (Dashes) */
+                    Spacer(modifier = Modifier.size(51.dp))
+
                     Row(
-                        modifier = Modifier.padding(vertical = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        repeat(pages.size) { index ->
-                            val isSelected = pagerState.currentPage == index
+                        repeat(pagerState.pageCount) { iteration ->
+                            val color = if (pagerState.currentPage == iteration) Color.White else Color.Gray
                             Box(
-                                modifier = Modifier
-                                    .width(26.dp)
-                                    .height(4.dp)
-                                    .clip(RoundedCornerShape(56.dp))
-                                    .background(
-                                        if (isSelected) Color.White else Color.White.copy(alpha = 0.2f)
-                                    )
+                                modifier = Modifier.background(color).height(4.dp).width(26.dp).padding(horizontal = 4.dp).clip(RoundedCornerShape(56.dp))
+
                             )
                         }
                     }
 
-                    /* Title */
+                    Spacer(modifier = Modifier.size(50.dp))
                     Text(
-                        text = pages[pageIndex].title,
-                        color = Color.White,
-                        style = MaterialTheme.typography.headlineMedium,
+                        text = "Manage your tasks",
+                        fontSize = 32.sp,
                         fontWeight = FontWeight.Bold,
+                        color = Color.White.copy(alpha = 87f)
                     )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    /* Description */
+                    Spacer(modifier = Modifier.size(50.dp))
                     Text(
-                        text = pages[pageIndex].description,
-                        color = Color.White.copy(alpha = 0.7f),
-                        style = MaterialTheme.typography.bodyLarge,
+                        text = "You can easily manager all of your daily tasks in DoMe for free",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.White.copy(alpha = 8.87f),
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(horizontal = 38.dp)
+                        modifier = Modifier.padding(horizontal = 38.dp),
+                        lineHeight = 30.sp
                     )
+                }
+
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 20.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+
+            ) {
+                TextButton(onClick = {}) {
+                    Text(text = "BACK", color = Color.White.copy(alpha = 0.44f))
+                }
+                Button(
+                    onClick = {},
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF8875FF)
+                    ),
+                    shape = RoundedCornerShape(4.dp)
+                ) {
+                    Text(text = "Next")
                 }
             }
         }
