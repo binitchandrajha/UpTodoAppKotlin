@@ -40,6 +40,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.uptodo.screen.onboarding.OnboardingViewModel
 
 val titles = listOf(
     "Manage your tasks",
@@ -75,6 +77,7 @@ val descriptions = listOf(
 fun OnboardingScreen(onFinish : () -> Unit){
     val pagerState = rememberPagerState(pageCount = { 3 })
     val scope = rememberCoroutineScope()
+    val viewModel: OnboardingViewModel = viewModel()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -116,14 +119,14 @@ fun OnboardingScreen(onFinish : () -> Unit){
 
                     Spacer(modifier = Modifier.size(50.dp))
                     Text(
-                        text = "Manage your tasks",
+                        text = pages[page].title,
                         fontSize = 32.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White.copy(alpha = 87f)
                     )
                     Spacer(modifier = Modifier.size(50.dp))
                     Text(
-                        text = "You can easily manager all of your daily tasks in DoMe for free",
+                        text = pages[page].description,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Normal,
                         color = Color.White.copy(alpha = 8.87f),
@@ -150,7 +153,12 @@ fun OnboardingScreen(onFinish : () -> Unit){
                 }
                 Button(
                     onClick = {
-                        scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
+                        if(pagerState.pageCount == pagerState.currentPage + 1){
+                            viewModel.saveOnboardingStatus()
+                            onFinish()
+                        } else {
+                            scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
+                        }
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF8875FF)
