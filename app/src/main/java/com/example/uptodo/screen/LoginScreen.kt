@@ -1,6 +1,5 @@
 package com.example.uptodo.screen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.uptodo.ui.components.AppHeader
 import com.example.uptodo.ui.components.CustomTextField
+import com.example.uptodo.ui.components.Divider
 import com.example.uptodo.ui.components.PrimaryButton
 import com.example.uptodo.ui.theme.AppBackground
 
@@ -70,6 +70,10 @@ fun LoginScreen(){
                     onClick = {},
                     enabled = if (username.isNotEmpty() && password.isNotEmpty()) true else false
                 )
+
+                Spacer(modifier = Modifier.size(45.dp))
+
+                Divider()
             }
         }
     }
