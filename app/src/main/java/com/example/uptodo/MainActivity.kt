@@ -7,8 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,11 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.uptodo.ui.theme.UpTodoTheme
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.uptodo.data.models.locals.datastore.DataStoreManager
 import com.example.uptodo.screen.LoginScreen
 import com.example.uptodo.screen.OnboardingScreen
 import com.example.uptodo.screen.RegisterScreen
@@ -93,14 +89,13 @@ class MainActivity : ComponentActivity() {
                                 onLoginClick = {
                                     navController.navigate(Screen.Login)
                                 },
-                                onRegisterClick = {
-                                    navController.navigate(Screen.Home){
-                                        popUpTo(Screen.Start){
-                                            inclusive = true
-                                        }
+                            ) {
+                                navController.navigate(Screen.Home) {
+                                    popUpTo(Screen.Start) {
+                                        inclusive = true
                                     }
                                 }
-                            )
+                            }
                         }
                         composable<Screen.Home> {
                             Surface(modifier = Modifier.fillMaxSize()) {
