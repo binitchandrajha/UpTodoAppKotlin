@@ -18,3 +18,8 @@ val Gray500 = Color(0xFF979797)
 val InputBackground = Color(0xFF1D1D1D)
 
 val TextSecondary = Color(0xFF535353)
+
+val PrimaryButton = Color(0xFF8687E7)
+val PrimaryButtonDisabled = Color(0xFF8687E7).copy(alpha = 0.5f)
+
+val PrimaryButtonDisabledText = Color(0xFFFFFFFF).copy(alpha = 0.5f)

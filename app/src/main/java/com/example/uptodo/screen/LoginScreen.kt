@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.uptodo.ui.components.AppHeader
 import com.example.uptodo.ui.components.CustomTextField
+import com.example.uptodo.ui.components.PrimaryButton
 import com.example.uptodo.ui.theme.AppBackground
 
 @Composable
@@ -62,7 +63,13 @@ fun LoginScreen(){
                     placeholder = "Enter your password",
                     isPassword = true
                 )
+                Spacer(modifier = Modifier.size(70.dp))
 
+                PrimaryButton(
+                    title = "Login",
+                    onClick = {},
+                    enabled = if (username.isNotEmpty() && password.isNotEmpty()) true else false
+                )
             }
         }
     }
