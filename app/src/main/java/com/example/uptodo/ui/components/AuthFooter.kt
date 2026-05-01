@@ -1,23 +1,30 @@
 package com.example.uptodo.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun AuthFooter(
     title: String = "Don't have an account?",
-    actionText: String
+    actionText: String,
+    onClick: () -> Unit = {}
 ){
     Row(
-        modifier = Modifier.fillMaxWidth().padding(bottom = 30.dp),
-        horizontalArrangement = Arrangement.Center
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 30.dp),
+        horizontalArrangement = Arrangement.Center,
     ) {
         Text(
             text = title,
@@ -26,9 +33,26 @@ fun AuthFooter(
         Text(
             text = actionText,
             color = Color.White,
-            modifier = Modifier.padding(start = 4.dp)
+            modifier = Modifier.padding(start = 4.dp).clickable(enabled = true, onClick = onClick),
         )
+//        TextButton(
+//            onClick = onClick,
+//            modifier = Modifier.padding(start = 4.dp),
+//        ) {
+//            Text(
+//                text = actionText,
+//                color = Color.White,
+//            )
+//        }
+
     }
 }
 
+@Preview
+@Composable
+fun AuthFooterPreview(){
+    AuthFooter(
+        actionText = "Register"
+    )
+}
 

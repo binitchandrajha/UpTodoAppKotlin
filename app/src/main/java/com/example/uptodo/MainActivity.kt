@@ -75,10 +75,32 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable<Screen.Login> {
-                            LoginScreen()
+                            LoginScreen(
+                                onLoginClick = {
+                                    navController.navigate(Screen.Home){
+                                        popUpTo(Screen.Start){
+                                            inclusive = true
+                                        }
+                                    }
+                                },
+                                onRegisterClick = {
+                                    navController.navigate(Screen.Register)
+                                }
+                            )
                         }
                         composable<Screen.Register> {
-                            RegisterScreen()
+                            RegisterScreen(
+                                onLoginClick = {
+                                    navController.navigate(Screen.Login)
+                                },
+                                onRegisterClick = {
+                                    navController.navigate(Screen.Home){
+                                        popUpTo(Screen.Start){
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+                            )
                         }
                         composable<Screen.Home> {
                             Surface(modifier = Modifier.fillMaxSize()) {

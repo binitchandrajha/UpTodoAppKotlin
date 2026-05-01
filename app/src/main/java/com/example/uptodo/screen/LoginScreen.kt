@@ -29,7 +29,10 @@ import com.example.uptodo.ui.components.SocialLoginButton
 import com.example.uptodo.ui.theme.AppBackground
 
 @Composable
-fun LoginScreen(){
+fun LoginScreen(
+    onLoginClick: () -> Unit,
+    onRegisterClick: () -> Unit
+){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Scaffold(
@@ -70,7 +73,9 @@ fun LoginScreen(){
 
                 PrimaryButton(
                     title = "Login",
-                    onClick = {},
+                    onClick = {
+                      onLoginClick()
+                    },
                     enabled = if (username.isNotEmpty() && password.isNotEmpty()) true else false
                 )
 
@@ -96,7 +101,10 @@ fun LoginScreen(){
             }
             AuthFooter(
                 title = "Don't have an account?",
-                actionText = "Register"
+                actionText = "Register",
+                onClick = {
+                    onRegisterClick()
+                }
             )
         }
     }
@@ -105,5 +113,8 @@ fun LoginScreen(){
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview(){
-    LoginScreen()
+    LoginScreen(
+        onLoginClick = {},
+        onRegisterClick = {}
+    )
 }

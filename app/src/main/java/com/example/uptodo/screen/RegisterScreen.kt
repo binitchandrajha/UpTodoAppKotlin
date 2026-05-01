@@ -29,7 +29,10 @@ import com.example.uptodo.ui.components.SocialLoginButton
 import com.example.uptodo.ui.theme.AppBackground
 
 @Composable
-fun RegisterScreen(){
+fun RegisterScreen(
+    onLoginClick: () -> Unit,
+    onRegisterClick: () -> Unit
+){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
@@ -69,8 +72,8 @@ fun RegisterScreen(){
                 )
                 Spacer(modifier = Modifier.size(24.dp))
                 CustomTextField(
-                    value = password,
-                    onValueChange = {password = it},
+                    value = confirmPassword,
+                    onValueChange = {confirmPassword = it},
                     label = "Confirm Password",
                     placeholder = "Enter your confirm password",
                     isPassword = true
@@ -79,8 +82,8 @@ fun RegisterScreen(){
 
                 PrimaryButton(
                     title = "Register",
-                    onClick = {},
-                    enabled = if (username.isNotEmpty() && password.isNotEmpty()) true else false
+                    onClick = {onRegisterClick()},
+                    enabled = if (username.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) true else false
                 )
 
                 Spacer(modifier = Modifier.size(45.dp))
@@ -104,8 +107,9 @@ fun RegisterScreen(){
                 Spacer(modifier = Modifier.size(46.dp))
             }
             AuthFooter(
-                title = "Don't have an account?",
-                actionText = "Register"
+                title = "Already have an account?",
+                actionText = "Login",
+                onClick = {onLoginClick()}
             )
         }
     }
@@ -114,5 +118,8 @@ fun RegisterScreen(){
 @Preview(showBackground = true)
 @Composable
 fun PreviewRegisterScreen(){
-    RegisterScreen()
+    RegisterScreen(
+        onLoginClick = {},
+        onRegisterClick = {}
+    )
 }
