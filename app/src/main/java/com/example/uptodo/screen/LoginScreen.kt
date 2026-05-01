@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.uptodo.R
 import com.example.uptodo.ui.components.AppHeader
+import com.example.uptodo.ui.components.AuthFooter
 import com.example.uptodo.ui.components.CustomTextField
 import com.example.uptodo.ui.components.Divider
 import com.example.uptodo.ui.components.PrimaryButton
@@ -41,7 +42,7 @@ fun LoginScreen(){
 
             )
             Column(
-                modifier = Modifier.padding(horizontal = 24.dp).fillMaxWidth()
+                modifier = Modifier.padding(horizontal = 24.dp).fillMaxWidth().weight(1f)
             ) {
                 Spacer(modifier = Modifier.size(40.dp))
                 Text(
@@ -91,7 +92,12 @@ fun LoginScreen(){
                     title = "Login with Apple"
                 )
 
+                Spacer(modifier = Modifier.size(46.dp))
             }
+            AuthFooter(
+                title = "Don't have an account?",
+                actionText = "Register"
+            )
         }
     }
 }
