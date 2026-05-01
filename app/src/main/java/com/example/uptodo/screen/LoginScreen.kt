@@ -19,10 +19,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.uptodo.R
 import com.example.uptodo.ui.components.AppHeader
 import com.example.uptodo.ui.components.CustomTextField
 import com.example.uptodo.ui.components.Divider
 import com.example.uptodo.ui.components.PrimaryButton
+import com.example.uptodo.ui.components.SocialLoginButton
 import com.example.uptodo.ui.theme.AppBackground
 
 @Composable
@@ -74,6 +76,21 @@ fun LoginScreen(){
                 Spacer(modifier = Modifier.size(45.dp))
 
                 Divider()
+
+                Spacer(modifier = Modifier.size(39.dp))
+
+                SocialLoginButton(
+                    icon = R.drawable.google,
+                    title = "Login with Google"
+                )
+
+                Spacer(modifier = Modifier.size(20.dp))
+
+                SocialLoginButton(
+                    icon = R.drawable.apple,
+                    title = "Login with Apple"
+                )
+
             }
         }
     }

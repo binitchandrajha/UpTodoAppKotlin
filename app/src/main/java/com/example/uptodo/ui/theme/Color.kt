@@ -23,3 +23,5 @@ val PrimaryButton = Color(0xFF8687E7)
 val PrimaryButtonDisabled = Color(0xFF8687E7).copy(alpha = 0.5f)
 
 val PrimaryButtonDisabledText = Color(0xFFFFFFFF).copy(alpha = 0.5f)
+
+val Violet500 = Color(0xFF8875FF)
