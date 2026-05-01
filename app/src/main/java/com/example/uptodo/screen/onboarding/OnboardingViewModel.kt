@@ -2,11 +2,7 @@ package com.example.uptodo.screen.onboarding
 
 
 import android.app.Application
-import android.content.Context
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
 import com.example.uptodo.data.models.locals.datastore.DataStoreManager

@@ -63,4 +63,6 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.compose.material.icons.core)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 }
