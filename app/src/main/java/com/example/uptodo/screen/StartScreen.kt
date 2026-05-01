@@ -23,7 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun StartScreen(){
+fun StartScreen(
+    onLoginClick: () -> Unit,
+    onRegisterClick: () -> Unit
+){
     Scaffold(
         containerColor = Color(color = 0xFF121212)
     ) { innerPaading ->
@@ -58,7 +61,9 @@ fun StartScreen(){
            }
 
             Column(modifier = Modifier.padding(24.dp)) {
-                Button(onClick = {},
+                Button(onClick = {
+                  onLoginClick()
+                },
                     modifier = Modifier.fillMaxWidth().height(48.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF8875FF)
@@ -68,7 +73,9 @@ fun StartScreen(){
                     Text("Login")
                 }
                 Spacer(modifier = Modifier.size(28.dp))
-                Button(onClick = {},
+                Button(onClick = {
+                    onRegisterClick()
+                },
                     modifier = Modifier.fillMaxWidth().height(48.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Transparent
@@ -87,5 +94,5 @@ fun StartScreen(){
 @Preview(showBackground = true)
 @Composable
 fun StartScreenPreview(){
-    StartScreen()
+    StartScreen({}, onRegisterClick = {})
 }

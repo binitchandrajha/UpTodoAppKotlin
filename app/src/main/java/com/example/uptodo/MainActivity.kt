@@ -24,7 +24,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.uptodo.data.models.locals.datastore.DataStoreManager
+import com.example.uptodo.screen.LoginScreen
 import com.example.uptodo.screen.OnboardingScreen
+import com.example.uptodo.screen.RegisterScreen
 import com.example.uptodo.screen.Screen
 import com.example.uptodo.screen.StartScreen
 import com.example.uptodo.screen.onboarding.OnboardingViewModel
@@ -54,7 +56,6 @@ class MainActivity : ComponentActivity() {
                         startDestination = if (isOnboardingCompleted) Screen.Start else Screen.Onboarding
                     ){
                         composable<Screen.Onboarding> {
-                            println("Onboarding screen navigation")
                             OnboardingScreen {
                                 navController.navigate(Screen.Start){
                                     popUpTo(Screen.Onboarding){
@@ -64,7 +65,20 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                         composable<Screen.Start> {
-                            StartScreen()
+                            StartScreen(
+                                onLoginClick = {
+                                    navController.navigate(Screen.Login)
+                                },
+                                onRegisterClick = {
+                                    navController.navigate(Screen.Register)
+                                }
+                            )
+                        }
+                        composable<Screen.Login> {
+                            LoginScreen()
+                        }
+                        composable<Screen.Register> {
+                            RegisterScreen()
                         }
                         composable<Screen.Home> {
                             Surface(modifier = Modifier.fillMaxSize()) {
