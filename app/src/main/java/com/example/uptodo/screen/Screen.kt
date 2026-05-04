@@ -7,6 +7,8 @@ sealed class Screen {
     @Serializable object  Onboarding : Screen()
 
     @Serializable object  Start: Screen()
+
+    @Serializable object  Main: Screen()
     @Serializable object  Home: Screen()
     @Serializable object  Login: Screen()
     @Serializable object  Register: Screen()
