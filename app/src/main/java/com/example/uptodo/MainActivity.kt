@@ -25,6 +25,7 @@ import com.example.uptodo.screen.OnboardingScreen
 import com.example.uptodo.screen.RegisterScreen
 import com.example.uptodo.screen.Screen
 import com.example.uptodo.screen.StartScreen
+import com.example.uptodo.screen.main.MainScreen
 import com.example.uptodo.screen.onboarding.OnboardingViewModel
 
 class MainActivity : ComponentActivity() {
@@ -73,7 +74,7 @@ class MainActivity : ComponentActivity() {
                         composable<Screen.Login> {
                             LoginScreen(
                                 onLoginClick = {
-                                    navController.navigate(Screen.Home){
+                                    navController.navigate(Screen.Main){
                                         popUpTo(Screen.Start){
                                             inclusive = true
                                         }
@@ -90,7 +91,7 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(Screen.Login)
                                 },
                             ) {
-                                navController.navigate(Screen.Home) {
+                                navController.navigate(Screen.Main) {
                                     popUpTo(Screen.Start) {
                                         inclusive = true
                                     }
@@ -102,6 +103,11 @@ class MainActivity : ComponentActivity() {
                                 Box(contentAlignment = Alignment.Center) {
                                     Text("Home Screen")
                                 }
+                            }
+                        }
+                        composable<Screen.Main> {
+                            Surface(modifier = Modifier.fillMaxSize()) {
+                                MainScreen()
                             }
                         }
                     }
