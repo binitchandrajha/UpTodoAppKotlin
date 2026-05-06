@@ -8,11 +8,13 @@ import com.example.uptodo.R
 @Composable
 fun SocialLoginButton(
     @DrawableRes icon: Int,
-    title: String
+    title: String,
+    onClick: () -> Unit
 ){
     OutlineButton(
         icon = icon,
-        title = title
+        title = title,
+        onClick = onClick
     )
 }
 
@@ -21,6 +23,7 @@ fun SocialLoginButton(
 fun SocialLoginButtonPreview(){
     SocialLoginButton(
         icon = R.drawable.google,
-        title = "Login with Google"
+        title = "Login with Google",
+        onClick = {}
     )
 }

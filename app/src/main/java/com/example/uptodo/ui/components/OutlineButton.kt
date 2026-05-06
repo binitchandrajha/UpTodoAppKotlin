@@ -35,10 +35,11 @@ fun OutlineButton(
     iconTitleSpacing: Dp = 10.dp,
     titleFontSize: TextUnit = 16.sp,
     titleFontWeight: FontWeight = FontWeight.Normal,
-    titleFontColor: Color = Color.White
+    titleFontColor: Color = Color.White,
+    onClick: () -> Unit
 ){
     Button(
-        onClick = {},
+        onClick = {onClick()},
         modifier = Modifier.fillMaxWidth().height(height),
         shape = RoundedCornerShape(borderRadius),
         colors = ButtonDefaults.buttonColors(
@@ -71,7 +72,8 @@ fun OutlineButton(
 fun OutlineButtonPreview(){
     OutlineButton(
         icon = R.drawable.google,
-        title = "Login with Google"
+        title = "Login with Google",
+        onClick = {}
 
     )
 }

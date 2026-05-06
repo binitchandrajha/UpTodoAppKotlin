@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.uptodo.R
 import com.example.uptodo.ui.components.AppHeader
 import com.example.uptodo.ui.components.AuthFooter
@@ -27,14 +28,16 @@ import com.example.uptodo.ui.components.Divider
 import com.example.uptodo.ui.components.PrimaryButton
 import com.example.uptodo.ui.components.SocialLoginButton
 import com.example.uptodo.ui.theme.AppBackground
+import com.example.uptodo.ui.viewmodels.LoginViewModel
 
 @Composable
 fun LoginScreen(
     onLoginClick: () -> Unit,
-    onRegisterClick: () -> Unit
+    onRegisterClick: () -> Unit,
 ){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val viewModel: LoginViewModel = viewModel()
     Scaffold(
         containerColor = AppBackground
     ) { innerPadding ->
@@ -74,6 +77,7 @@ fun LoginScreen(
                 PrimaryButton(
                     title = "Login",
                     onClick = {
+                      viewModel.updateLoginStatus(true);
                       onLoginClick()
                     },
                     enabled = if (username.isNotEmpty() && password.isNotEmpty()) true else false
@@ -87,14 +91,16 @@ fun LoginScreen(
 
                 SocialLoginButton(
                     icon = R.drawable.google,
-                    title = "Login with Google"
+                    title = "Login with Google",
+                    onClick = {}
                 )
 
                 Spacer(modifier = Modifier.size(20.dp))
 
                 SocialLoginButton(
                     icon = R.drawable.apple,
-                    title = "Login with Apple"
+                    title = "Login with Apple",
+                    onClick = {}
                 )
 
                 Spacer(modifier = Modifier.size(46.dp))
@@ -115,6 +121,5 @@ fun LoginScreen(
 fun LoginScreenPreview(){
     LoginScreen(
         onLoginClick = {},
-        onRegisterClick = {}
-    )
+    ) {}
 }
