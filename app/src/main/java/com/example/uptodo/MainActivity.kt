@@ -27,6 +27,7 @@ import com.example.uptodo.screen.Screen
 import com.example.uptodo.screen.StartScreen
 import com.example.uptodo.screen.main.MainScreen
 import com.example.uptodo.screen.onboarding.OnboardingViewModel
+import com.example.uptodo.ui.viewmodels.LoginViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,7 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
 
         val viewModel: OnboardingViewModel by viewModels()
+        val loginViewModel: LoginViewModel by viewModels()
 
         splashScreen.setKeepOnScreenCondition {
             viewModel.isLoading.value
@@ -42,6 +44,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val isOnboardingCompleted by viewModel.isOnboardingCompleted.collectAsState()
+            val isLoggedIn by loginViewModel.isLoggedIn.collectAsState()
+
             val isLoading by viewModel.isLoading.collectAsState()
             UpTodoTheme {
 
@@ -50,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = if (isOnboardingCompleted) Screen.Start else Screen.Onboarding
+                        startDestination = if (isOnboardingCompleted) if(isLoggedIn) Screen.Main else Screen.Start else Screen.Onboarding
                     ){
                         composable<Screen.Onboarding> {
                             OnboardingScreen {
@@ -80,10 +84,9 @@ class MainActivity : ComponentActivity() {
                                         }
                                     }
                                 },
-                                onRegisterClick = {
-                                    navController.navigate(Screen.Register)
-                                }
-                            )
+                            ) {
+                                navController.navigate(Screen.Register)
+                            }
                         }
                         composable<Screen.Register> {
                             RegisterScreen(

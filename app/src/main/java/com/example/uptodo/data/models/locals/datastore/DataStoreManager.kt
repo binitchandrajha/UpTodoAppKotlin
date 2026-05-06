@@ -12,6 +12,7 @@ val Context.dataStore by preferencesDataStore(name = "app_prefs")
 class DataStoreManager(private val context: Context) {
     object PreferencesKeys {
         val ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
+        val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
     }
 
     suspend fun saveOnBoardingCompleted(context: Context) {
@@ -24,6 +25,18 @@ class DataStoreManager(private val context: Context) {
        return context.dataStore.data.map { preferences ->
           preferences[PreferencesKeys.ONBOARDING_COMPLETED] ?: false
        }
+    }
+
+    // USER_LOGGED_IN
+    fun getIsLoggedIn(): Flow<Boolean> {
+        return context.dataStore.data.map { preferences ->
+            preferences[PreferencesKeys.IS_LOGGED_IN] ?: false
+        }
+    }
+    suspend fun handleIsLoggedIn(isLoggedIn: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[PreferencesKeys.IS_LOGGED_IN] = isLoggedIn
+        }
     }
 
 }
